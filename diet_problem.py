@@ -1,5 +1,5 @@
 from ortools.linear_solver import pywraplp
-from libs.ortools_lib import  ObjVal, newSolver,Simple_SolVal #,SolVal
+from libs.ortools_lib import  ObjVal, newSolver,Simple_SolVal
 
 
 " N is a multi-dimensional array that have :" \
@@ -58,7 +58,6 @@ def gen_diet_problem(nb_foods=5, nb_nutrients=4):
     from random import randint,uniform
     data = []
     ranges = [10**randint(2,4) for i in range(nb_nutrients)]
-    print(ranges,'ranges')
     x = [randint(15,25) for i in range(nb_foods)] # this must be feasible
     MinNutrient = [0]*nb_nutrients
     MaxNutrient = [0]*nb_nutrients
@@ -86,6 +85,6 @@ def gen_diet_problem(nb_foods=5, nb_nutrients=4):
 if __name__ == '__main__':
 
     N = gen_diet_problem()
-    #print(N,'-> data')
-    #print(solve_diet(N))
+    print(N,'-> data')
+    print(solve_diet(N))
 

@@ -1,7 +1,7 @@
 import sys
 from libs.ortools_lib import Simple_SolVal,ObjVal,newSolver
 from random import randint,uniform,random
-from tableutils import wrapmat,printmat,formatmat
+from libs.tableutils import wrapmat,printmat,formatmat
 
 def data_model(foods, nutrients):
     diet_data = []

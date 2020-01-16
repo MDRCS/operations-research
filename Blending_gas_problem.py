@@ -1,7 +1,7 @@
 import sys
 from libs.ortools_lib import Simple_SolVal,ObjVal,newSolver
 from random import randint,random
-import tableutils
+from libs import tableutils
 
 def raws_data(raw):
 

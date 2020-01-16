@@ -1,7 +1,7 @@
 from libs.ortools_lib import Simple_SolVal,newSolver,ObjVal
 from random import randint, random
 import sys
-import tableutils
+from libs import tableutils
 
 def gen_data_resources(oils = 9, acids = 7):
     #Kinds of oils should be bigger than acids (oils > acids)

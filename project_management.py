@@ -1,6 +1,8 @@
-from ortools.linear_solver import pywraplp
+import sys
 from libs.ortools_lib import ObjVal, Simple_SolVal, newSolver
-from random import randint
+from random import randint,random
+from libs import tableutils
+
 
 def data_model(tasks = 12):
 
@@ -34,15 +36,45 @@ def project_management_solver(Tasks):
     s.Minimize(Total)
     rc = s.Solve()
 
-    return Simple_SolVal(Total),Simple_SolVal(t)
+    return rc,Simple_SolVal(Total),Simple_SolVal(t)
 
 
-if __name__ == '__main__':
+def main():
+
+    tasks = 12
+    if len(sys.argv) <= 1:
+        print('Usage is main [data|run] [seed]')
+        return
+    elif len(sys.argv) >= 3:
+        random.seed(int(sys.argv[2]))
 
     tasks_planning = data_model()
 
-    total_project_duration, durations = project_management_solver(tasks_planning)
+    if sys.argv[1] == 'data':
+        planning = []
+        for i in range(tasks):
+            task = [tasks_planning[i][0], tasks_planning[i][1]]
+            s = '{'
+            for j in tasks_planning[i][2]:
+                s = s + ' ' + str(j)
+            s = s + ' }'
+            task.append(s)
+            planning.append(task)
+        planning.insert(0, ['Task', 'Duration', 'Preceding tasks'])
+        tableutils.printmat(planning, True)
 
-    print('Total duration : ',total_project_duration)
-    print('Durations for each Task : ',durations)
+    elif sys.argv[1] == 'run':
+        feasablity,total_project_duration, durations  = project_management_solver(tasks_planning)
+        schedule = []
+        tasks_ = ['Tasks'] + [tasks_planning[i][0] for i in range(tasks)]
+        schedule.append(tasks_)
+        starts_ = ['Start'] + [int(durations[i]) for i in range(tasks)]
+        schedule.append(starts_)
+        ends_ = ['End'] + [int(durations[i] + tasks_planning[i][1]) for i in range(tasks)]
+        schedule.append(ends_)
+        tableutils.printmat(schedule, True)
+
+if __name__ == '__main__':
+    sys.argv.append('run')
+    main()
 

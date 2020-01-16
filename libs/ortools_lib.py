@@ -51,8 +51,8 @@ def Simple_SolVal(x):
     return [Simple_SolVal(e) for e in x]
 
 
-#
-# def SolVal(x):
+
+# def Simple_SolVal(x):
 #   if type(x) is not list:
 #     #return 0 if x is None else x (if isinstance(x,(int,float)) else x.SolutionValue() (if x.Integer() is False  else int(x.SolutionValue())
 #     return 0 if x is None \
@@ -61,7 +61,7 @@ def Simple_SolVal(x):
 #                 else int(x.SolutionValue())
 #
 #   elif type(x) is list:
-#     return [SolVal(e) for e in x]
+#     return [Simple_SolVal(e) for e in x]
 
 def ObjVal(x):
   print(x.Objective().Value(),'Objective')

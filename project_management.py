@@ -18,7 +18,6 @@ def data_model(tasks = 12):
 
     return Tasks
 
-
 def project_management_solver(Tasks):
 
     s = newSolver(' Project Management ')
@@ -46,3 +45,4 @@ if __name__ == '__main__':
 
     print('Total duration : ',total_project_duration)
     print('Durations for each Task : ',durations)
+

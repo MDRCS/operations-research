@@ -1,9 +1,9 @@
-from ortools.linear_solver import pywraplp
+import sys
 from libs.ortools_lib import Simple_SolVal,ObjVal,newSolver
-from random import randint,uniform
+from random import randint,uniform,random
+from tableutils import wrapmat,printmat,formatmat
 
-
-def data_model(foods = 5, nutrients = 4):
+def data_model(foods, nutrients):
     diet_data = []
     min_nut = []
     max_nut = []
@@ -33,7 +33,6 @@ def diet_solver(data):
     min_food = 4
     max_food = 5
     cost = 6
-    length = len(data)
     nutrients = 4
     foods = 5
     min_nut = 5
@@ -55,19 +54,36 @@ def diet_solver(data):
     return ObjVal(s),Simple_SolVal(serving_food)
 
 
+def main():
+
+    if len(sys.argv) == 1:
+        return
+
+    elif len(sys.argv) == 3:
+        random.seed(int(sys.argv[2]))
+
+    if sys.argv[1] == 'run':
+        foods = 5
+        nutrients = 4
+        header = [''] + ['N' + str(i) for i in range(nutrients)] + ['Min', 'Max', 'Cost', 'Solution']
+        data = data_model(foods, nutrients)
+        obj_value, serving_foods = diet_solver(data)
+        T = [0] * nutrients
+        C = 0
+        for food in range(foods):
+            C = C + serving_foods[food] * data[food][nutrients + 2]
+            for nutrient in range(nutrients):
+                T[nutrient] = T[nutrient] + serving_foods[food] * data[food][nutrient]
+        for i in range(nutrients):
+            T[i] = int(round(T[i], 0))
+        T = T + ['', '', round(C, 2), '']
+        table = data + [T]
+        for i in range(0, foods):
+            table[i] = table[i] + [round(serving_foods[i], 2)]
+
+        wrapmat(table, ['F' + str(i) for i in range(foods)] + ['Min', 'Max', 'Sol'], header);
+        printmat(formatmat(wrapmat(table, ['F' + str(i) for i in range(foods)] + ['Min', 'Max', 'Sol'], header), True, 4))
+
 if __name__ == '__main__':
 
-    data = data_model()
-    print('\n DATA : \n')
-
-    for row in data:
-        print(row)
-
-    print('\n \n')
-    obj_value,serving_foods = diet_solver(data)
-
-    print('objective value -> ',obj_value)
-    print('\n vector of serving food : \n')
-
-    for f in range(len(serving_foods)):
-        print(f'F{f}',round(serving_foods[f],2))
+    main()

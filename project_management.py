@@ -45,8 +45,8 @@ def main():
     if len(sys.argv) <= 1:
         print('Usage is main [data|run] [seed]')
         return
-    elif len(sys.argv) >= 3:
-        random.seed(int(sys.argv[2]))
+    # elif len(sys.argv) >= 3:
+    #     random.seed(int(sys.argv[2]))
 
     tasks_planning = data_model()
 

@@ -148,8 +148,8 @@ def main():
         print('Usage is main [resources|target|cost|inventory|run] [seed]')
         return
 
-    elif len(sys.argv) > 2:
-        random.seed(int(sys.argv[2]))
+    # elif len(sys.argv) > 2:
+    #     random.seed(int(sys.argv[2]))
 
     resources = gen_data_resources(oils, acids)
     acid_boundaries = gen_data_acids_boundaries(resources)

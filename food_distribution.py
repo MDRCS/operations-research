@@ -59,8 +59,8 @@ def main():
     if len(sys.argv) == 1:
         return
 
-    elif len(sys.argv) == 3:
-        random.seed(int(sys.argv[2]))
+    # elif len(sys.argv) == 3:
+    #     random.seed(int(sys.argv[2]))
 
     if sys.argv[1] == 'run':
         foods = 5

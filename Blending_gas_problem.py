@@ -76,8 +76,9 @@ def main():
     if len(sys.argv) <= 1:
         print('Usage is main [raw|ref|run] [seed]')
 
-    elif len(sys.argv) >= 3:
-        random.seed(int(sys.argv[2]))
+    # elif len(sys.argv) >= 3:
+    #     random.seed(int(sys.argv[2]))
+
     raws = raws_data(raw)
     refined = refined_data(ref)
 

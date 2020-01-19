@@ -5,6 +5,7 @@
 + Constraint programming
 + Linear programming
 + Integer programming
++ Discrete Mathematics
 
 and others
 
